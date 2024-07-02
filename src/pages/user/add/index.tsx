@@ -1,10 +1,11 @@
-import styles from "@/styles/Home.module.css";
+import Content from "@/components/Content";
+import SchoolForm from "@/components/SchoolForm";
+import UserForm from "@/components/UserForm";
 import { Inter } from "next/font/google";
-import Head from "next/head";
-import Image from "next/image";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
-  return <>user add</>;
+export default function UserAdd() {
+  return <Content title='用户添加'><UserForm /></Content>;
 }

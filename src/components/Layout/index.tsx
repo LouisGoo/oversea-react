@@ -126,7 +126,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
               <Dropdown menu={{ items: USER_ITEMS }}>
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
-                    用户名
+                    admin
                     <DownOutlined />
                   </Space>
                 </a>
