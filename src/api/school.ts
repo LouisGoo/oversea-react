@@ -10,3 +10,8 @@ export async function schoolAdd(params: SchoolType) {
     return request.post('https://mock.apipark.cn/m1/4037335-3674408-default/college/info',params);
     // return res.data.data.list;
 }
+
+export async function schoolDelete(id: number) {
+    return request.delete(`https://mock.apipark.cn/m1/4037335-3674408-default/school/${id}`);
+    // return res.data.data.list;
+}

@@ -4,6 +4,7 @@
     padding: 24px;
     overflow: auto;
     height: calc(100% - 60px);
+    min-height: calc(100vh - 164px);
   }
   
   .title {

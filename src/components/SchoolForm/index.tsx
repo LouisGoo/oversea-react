@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -29,20 +29,32 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-export default function SchoolForm () {
+export default function SchoolForm ({formData} :{formData?:SchoolType}){
 
     const [form] = useForm();
     const onReset = () => {
         form.resetFields();
     };
 
+    useEffect(()=>{
+      if(formData){
+
+        form.resetFields();
+      }
+
+    })
+
     const [showPreview, setShowPreview] = useState(false);
     const [preview, setPreview] = useState('');
 
     const handleShowPreview = () => {
+        if(formData){
+          setPreview(form.getFieldValue('logoUrl'));
+        }
         setShowPreview(!showPreview);
     }
     const handleChangePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // form.setFieldValue('logoUrl',e.target.value);
         setPreview(e.target.value);
     }
 
@@ -65,13 +77,14 @@ export default function SchoolForm () {
             layout="horizontal"
             style={{ maxWidth: 600 }}
             onFinish={handleFinish}
+            initialValues={formData}
           >
             <Form.Item label="大学" name="collegeName" rules={[{required: true, message:"请输入校名"}]}>
               <Input />
             </Form.Item>
             <Form.Item label="校徽" name="logoUrl" rules={[{required: true, message:"请输入校徽链接"}]}>
                 <Space.Compact style={{ width: '100%' }}>
-                    <Input onChange={handleChangePreview}/>
+                    <Input onChange={handleChangePreview} defaultValue={form.getFieldValue('logoUrl')}/>
                     <Button type="primary" onClick={handleShowPreview}>预览</Button>
                 </Space.Compact>
             </Form.Item>

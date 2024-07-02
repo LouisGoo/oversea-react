@@ -5,33 +5,36 @@ import styles from './index.module.css';
 import { SearchProps } from "antd/es/input/Search";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Link from "antd/es/typography/Link";
-import { getSchoolList, schoolDelete } from "@/api/school";
 import Content from "@/components/Content";
+import { getProgramList, programDelete } from "@/api/program";
 
 interface DataType {
-  collegeId: React.Key,
+  programId: React.Key,
   collegeName: string,
   region: string,
-  city: string,
-  qsrank: number,
-  rkrank: number,
   logoUrl: string,
-  siteUrl: string,
   introduction: string,
-  avgScore: number,
+  programName: string,
+  major: string,
+  language: string,
+  requirement: string,
+  remark: string,
 }
 
 const inter = Inter({ subsets: ["latin"] });
 
 const COLUMNS: TableColumnsType<DataType> = [
   {
+    title:'项目',
+    dataIndex: 'programName',
+  },
+  {
     title: '院校',
     dataIndex: 'collegeName',
     render: (value,record) => (
         <Space>
           <Avatar src={record.logoUrl} />
-          <Link href={record.siteUrl} target="blank">{value}</Link>
+          {value}
         </Space>)
   },
   {
@@ -46,23 +49,29 @@ const COLUMNS: TableColumnsType<DataType> = [
         text: '美国',
         value: 'United States',
       },
+      {
+        text: '韩国',
+        value: '韩国',
+      }
     ],
     onFilter: (value, record) => record.region.indexOf(value as string) === 0,
   },
   {
-    title: 'QS排名',
-    dataIndex: 'qsrank',
-    defaultSortOrder: 'ascend',
-    sorter: (a, b) => a.qsrank - b.qsrank,
+    title: '专业',
+    dataIndex: 'major',
   },
+  {
+    title: '备注',
+    dataIndex: 'remark',
+  }
 ];
 
-export default function School() {
+export default function Program() {
   const onSearch: SearchProps['onSearch'] = async (value) => {
     if(value){
       const newData= allData.filter(item => (item as DataType).collegeName.includes(value))
-      setData(newData);
       setPagination({...pagination, total: data.length});
+      setData(newData);
     }else{
       setPagination({...pagination, total: data.length});
       setData(allData);
@@ -74,14 +83,14 @@ export default function School() {
     current: 1,
     pageSize: 10,
     showSizeChanger: true,
-    total: 25,
+    total: 2,
   })
 
   const [data, setData] = useState([]);
   const [allData, setAllData] = useState([]);
   useEffect(()=>{
     async function fetchData() {
-      const res = await getSchoolList();
+      const res = await getProgramList();
       console.log("🚀 ~ fetchData ~ res:", res)
       setData(res.data.list);
       setAllData(res.data.list);
@@ -94,7 +103,7 @@ export default function School() {
   const router = useRouter();
 
   const handleSchoolEdit=()=>{
-    router.push('/school/edit/1');
+    router.push('/program/edit/id');
   }
 
   const handleDelete=()=>{
@@ -103,12 +112,11 @@ export default function School() {
       okText: '确定',
       cancelText: '取消',
       async onOk(){
-        await schoolDelete(1);
+        await programDelete(1);
         message.success('删除成功');
       }
     })
   }
-
   const columns= [...COLUMNS,
     {
       title: 'Action',
@@ -128,7 +136,7 @@ export default function School() {
   };
 
   return (
-    <Content title="院校列表" operation={<Button type="primary" onClick={()=>router.push('/school/add')}>添加</Button>}>
+    <Content title="项目列表" operation={<Button type="primary" onClick={()=>router.push('/program/add')}>添加</Button>}>
     <Form
       form={form}
       onFinish={console.log}
@@ -140,19 +148,22 @@ export default function School() {
         <Input.Search placeholder="搜索院校" onSearch={onSearch} enterButton allowClear style={{width:300}}/>
       </Form.Item>
     </Form>
-      <Space style={{ marginBottom: 16 }}>
-        {/* <Button onClick={setQsSort}>Sort age</Button> */}
-        {/* <Button onClick={clearFilters}>清除筛选</Button>
-        <Button onClick={clearAll}>清除筛选与排序</Button> */}
-      </Space>
       <div className={styles.tableWrap}>
       <Table 
         columns={columns} 
         dataSource={data} 
         onChange={handleTableChange} 
-        // scroll={{y:'100vh'}}  
         scroll={{ y: 380}}
         pagination={{...pagination,total: pagination.total, showTotal: ()=>`共${pagination.total}条`}}
+        rowKey={(record)=>`${record.programId}`}
+        expandable={{
+          expandedRowRender: (record)=>(<>
+            {record.introduction}<br />
+            申请要求：{record.requirement}<br />
+            语言要求：{record.language}
+          </>),
+          rowExpandable: (record) => !!record.introduction
+        }}
       />
       </div>
     </Content>
