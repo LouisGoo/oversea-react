@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Button type="primary">button</Button>
+        <Image src={"/ustc3.jpg"} alt="" width={800} height={450}/>
       </main>
     </>
   );

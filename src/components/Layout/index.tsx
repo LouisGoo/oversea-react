@@ -99,6 +99,7 @@ const USER_ITEMS: MenuProps["items"] = [
 // export function Layout({ children }: { children: ReactNode }) {
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
+  // console.log("🚀 ~ router:", router.pathname)
   const handleMenuClick: MenuProps["onClick"] = ({ key }) => {
     router.push(key);
   };
@@ -141,6 +142,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
                 style={{ height: "100%", borderRight: 0 }}
                 items={ITEMS}
                 onClick={handleMenuClick}
+                selectedKeys={[router.pathname]}
               />
             </Sider>
             <AntdLayout className={styles.sectionContent}>

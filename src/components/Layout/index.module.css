@@ -23,9 +23,13 @@
 
 .sectionContent {
   padding: 32px;
+  padding-top: 12px;
 }
+
 .content {
-  background-color: #fff;
+  /* background-color: #fff;
   border-radius: 16px;
-  padding: 24px;
+  padding: 24px; */
+  overflow: auto;
+  height: 100%;
 }

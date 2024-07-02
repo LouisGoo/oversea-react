@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "antd/es/typography/Link";
 import { getSchoolList } from "@/api/school";
+import Content from "@/components/Content";
 
 interface DataType {
   collegeId: React.Key,
@@ -71,7 +72,7 @@ export default function School() {
     current: 1,
     pageSize: 10,
     showSizeChanger: true,
-    total: 0,
+    total: 25,
   })
 
   const [data, setData] = useState([]);
@@ -112,7 +113,7 @@ export default function School() {
   };
 
   return (
-    <>
+    <Content title="院校列表" operation={<Button type="primary" onClick={()=>router.push('/school/add')}>添加</Button>}>
     <Form
       form={form}
       onFinish={console.log}
@@ -139,6 +140,6 @@ export default function School() {
         pagination={{...pagination,total: pagination.total, showTotal: ()=>`共${pagination.total}条`}}
       />
       </div>
-    </>
+    </Content>
   );
 }
