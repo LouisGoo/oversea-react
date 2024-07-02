@@ -45,32 +45,32 @@ const items2: MenuProps["items"] = [
 const ITEMS = [
   {
     // icon: React.createElement(icon),
-    label: "图书管理",
-    key: "book",
+    label: "院校管理",
+    key: "school",
 
     children: [
-      { label: "图书列表", key: "/book" },
-      { label: "图书添加", key: "/book/add" },
+      { label: "院校列表", key: "/school" },
+      { label: "院校添加", key: "/school/add" },
     ],
   },
   {
     // icon: React.createElement(icon),
-    label: "借阅管理",
-    key: "borrow",
+    label: "项目管理",
+    key: "program",
 
     children: [
-      { label: "借阅列表", key: "/borrow" },
-      { label: "借阅添加", key: "/borrow/add" },
+      { label: "项目列表", key: "/program" },
+      { label: "项目添加", key: "/program/add" },
     ],
   },
   {
     // icon: React.createElement(icon),
-    label: "分类管理",
+    label: "申请管理",
     key: "category",
 
     children: [
-      { label: "分类列表", key: "/category" },
-      { label: "分类添加", key: "/category/add" },
+      { label: "申请列表", key: "/category" },
+      { label: "申请处理", key: "/category/add" },
     ],
   },
   {
@@ -120,7 +120,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
               alt="logo"
               className={styles.logo}
             />
-            三木图书管理系统
+            留学信息管理系统
             <span className={styles.user}>
               <Dropdown menu={{ items: USER_ITEMS }}>
                 <a onClick={(e) => e.preventDefault()}>
