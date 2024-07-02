@@ -111,7 +111,7 @@ export default function School() {
 
   const columns= [...COLUMNS,
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       render: () => (
         <Space size="small">

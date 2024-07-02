@@ -102,7 +102,7 @@ export default function Program() {
 
   const router = useRouter();
 
-  const handleSchoolEdit=()=>{
+  const handleEdit=()=>{
     router.push('/program/edit/id');
   }
 
@@ -119,11 +119,11 @@ export default function Program() {
   }
   const columns= [...COLUMNS,
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       render: () => (
         <Space size="small">
-          <Button type="link" onClick={handleSchoolEdit}>编辑</Button>
+          <Button type="link" onClick={handleEdit}>编辑</Button>
           <Button type="link" danger onClick={handleDelete}>删除</Button>
         </Space>
       ),

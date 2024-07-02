@@ -66,11 +66,11 @@ const ITEMS = [
   {
     // icon: React.createElement(icon),
     label: "申请管理",
-    key: "category",
+    key: "apply",
 
     children: [
-      { label: "申请列表", key: "/category" },
-      { label: "申请处理", key: "/category/add" },
+      { label: "申请列表", key: "/apply" },
+      // { label: "申请处理", key: "/apply/add" },
     ],
   },
   {

@@ -1,0 +1,16 @@
+export interface ApplyType {
+    programId: React.Key,
+    collegeId: number,
+    collegeName: string,
+    academyName: string,
+    region: string,
+    logoUrl: string,
+    introduction: string,
+    programName: string,
+    major: string,
+    studentName: string,
+    status: number,
+    language: string,
+    requirement: string,
+    remark: string,
+  }

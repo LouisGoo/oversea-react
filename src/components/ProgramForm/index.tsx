@@ -21,7 +21,6 @@ const tailLayout = {
   };
 
 export default function ProgramForm ({formData} :{formData?:ProgramType}) {
-console.log("🚀 ~ ProgramForm ~ formData:", formData)
 
     const [form] = useForm();
     const onReset = () => {
