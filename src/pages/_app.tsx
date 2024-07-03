@@ -7,6 +7,9 @@ import Login from "./login";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  // if(!localStorage.getItem('user')){
+  //   router.push('/login');
+  // }
 
   return router.pathname === '/login'?(<Component {...pageProps} />):(
     <Layout>

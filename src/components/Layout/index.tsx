@@ -4,7 +4,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { DownOutlined } from "@ant-design/icons";
-import { MenuProps, Space } from "antd";
+import { MenuProps, Space, message } from "antd";
 import { Layout as AntdLayout, Breadcrumb, Dropdown, Menu } from "antd";
 import Head from "next/head";
 import Image from "next/image";
@@ -85,16 +85,7 @@ const ITEMS = [
   },
 ];
 
-const USER_ITEMS: MenuProps["items"] = [
-  {
-    label: "用户中心",
-    key: "1",
-  },
-  {
-    label: "登出",
-    key: "2",
-  },
-];
+
 
 // export function Layout({ children }: { children: ReactNode }) {
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
@@ -103,6 +94,29 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const handleMenuClick: MenuProps["onClick"] = ({ key }) => {
     router.push(key);
   };
+
+  const USER_ITEMS: MenuProps["items"] = [
+    {
+      label: "用户中心",
+      key: "1",
+    },
+    {
+      key: "2",
+      label: (
+        <span
+          onClick={async () => {
+            // await setLogout();
+            localStorage.removeItem("user");
+            message.success("退出成功");
+            router.push("/login");
+          }}
+        >
+          退出
+        </span>
+      ),
+    },
+  ];
+
   return (
     <>
       <Head>
